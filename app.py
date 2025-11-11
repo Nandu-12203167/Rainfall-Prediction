@@ -6,7 +6,7 @@ import os
 app = Flask(__name__)
 
 # === Absolute Paths (for Windows) ===
-BASE_DIR = r"C:\Users\NANDU PENCHALA\OneDrive\Desktop\rainfall_prediction\rainfall_prediction\models"
+BASE_DIR = r"C:\Users\NANDU PENCHALA\OneDrive\Desktop\rainfall_prediction\models"
 
 MODEL_PATH = os.path.join(BASE_DIR, "rainfall_model.pkl")
 SCALER_PATH = os.path.join(BASE_DIR, "scaler.pkl")

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rainfall Prediction System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 22C10 19.2386 12.2386 17 15 17C15.7111 17 16.3859 17.1489 17 17.4163C17.5 13.7052 20.6863 11 24.5 11C28.6421 11 32 14.3579 32 18.5C32 18.7967 31.9844 19.09 31.9541 19.3785C34.2858 20.2532 36 22.501 36 25.1667C36 28.6645 33.1645 31.5 29.6667 31.5H12.3333C8.83553 31.5 6 28.6645 6 25.1667C6 22.501 7.71424 20.2532 10.0459 19.3785C10.0156 19.09 10 18.7967 10 18.5C10 18.3333 10.0067 18.1678 10.0198 18.0039C10.0066 18.17 10 18.3375 10 18.5063V22Z" fill="#4A90E2"/>
+                        <path d="M20 26L18 29M24 26L22 29M16 23L14 26" stroke="#4A90E2" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <h1>Rainfall Predictor</h1>
+                </div>
+                <p class="subtitle">Advanced meteorological prediction using machine learning</p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="form-section">
+                <form id="predictionForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="pressure">
+                                <span class="label-text">Atmospheric Pressure</span>
+                                <span class="label-unit">(hPa)</span>
+                            </label>
+                            <input type="number" id="pressure" name="pressure" step="0.1" required
+                                   placeholder="1013.25" min="950" max="1050">
+                            <small>Normal: 1013 hPa</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="maxtemp">
+                                <span class="label-text">Maximum Temperature</span>
+                                <span class="label-unit">(°C)</span>
+                            </label>
+                            <input type="number" id="maxtemp" name="maxtemp" step="0.1" required
+                                   placeholder="28.5" min="-20" max="50">
+                            <small>Daily high temperature</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="temperature">
+                                <span class="label-text">Current Temperature</span>
+                                <span class="label-unit">(°C)</span>
+                            </label>
+                            <input type="number" id="temperature" name="temperature" step="0.1" required
+                                   placeholder="25.0" min="-20" max="50">
+                            <small>Current ambient temp</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mintemp">
+                                <span class="label-text">Minimum Temperature</span>
+                                <span class="label-unit">(°C)</span>
+                            </label>
+                            <input type="number" id="mintemp" name="mintemp" step="0.1" required
+                                   placeholder="18.2" min="-20" max="50">
+                            <small>Daily low temperature</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dewpoint">
+                                <span class="label-text">Dew Point</span>
+                                <span class="label-unit">(°C)</span>
+                            </label>
+                            <input type="number" id="dewpoint" name="dewpoint" step="0.1" required
+                                   placeholder="15.0" min="-20" max="40">
+                            <small>Moisture saturation point</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="humidity">
+                                <span class="label-text">Relative Humidity</span>
+                                <span class="label-unit">(%)</span>
+                            </label>
+                            <input type="number" id="humidity" name="humidity" step="1" required
+                                   placeholder="75" min="0" max="100">
+                            <small>0-100%</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cloud">
+                                <span class="label-text">Cloud Cover</span>
+                                <span class="label-unit">(%)</span>
+                            </label>
+                            <input type="number" id="cloud" name="cloud" step="1" required
+                                   placeholder="60" min="0" max="100">
+                            <small>Sky coverage</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sunshine">
+                                <span class="label-text">Sunshine Duration</span>
+                                <span class="label-unit">(hours)</span>
+                            </label>
+                            <input type="number" id="sunshine" name="sunshine" step="0.1" required
+                                   placeholder="6.5" min="0" max="24">
+                            <small>Daily sunshine hours</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="winddirection">
+                                <span class="label-text">Wind Direction</span>
+                                <span class="label-unit">(degrees)</span>
+                            </label>
+                            <input type="number" id="winddirection" name="winddirection" step="1" required
+                                   placeholder="180" min="0" max="360">
+                            <small>0-360° (0=N, 90=E)</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="windspeed">
+                                <span class="label-text">Wind Speed</span>
+                                <span class="label-unit">(km/h)</span>
+                            </label>
+                            <input type="number" id="windspeed" name="windspeed" step="0.1" required
+                                   placeholder="15.5" min="0" max="200">
+                            <small>Average wind speed</small>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="submit" class="btn btn-primary" id="predictBtn">
+                            <span class="btn-text">Predict Rainfall</span>
+                            <span class="btn-loader"></span>
+                        </button>
+                        <button type="button" class="btn btn-secondary" id="resetBtn">Reset</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="result-section" id="resultSection">
+                <div class="result-card">
+                    <div class="result-header">
+                        <h2>Prediction Result</h2>
+                        <div class="result-icon" id="resultIcon"></div>
+                    </div>
+                    <div class="result-content">
+                        <div class="prediction-main">
+                            <span class="prediction-label">Forecast:</span>
+                            <span class="prediction-value" id="predictionValue">-</span>
+                        </div>
+                        <div class="confidence-meter">
+                            <div class="confidence-label">
+                                <span>Confidence Level</span>
+                                <span class="confidence-percentage" id="confidenceValue">-</span>
+                            </div>
+                            <div class="confidence-bar">
+                                <div class="confidence-fill" id="confidenceFill"></div>
+                            </div>
+                        </div>
+                        <div class="probability-grid">
+                            <div class="probability-item">
+                                <div class="prob-label">No Rain</div>
+                                <div class="prob-value" id="noRainProb">-</div>
+                            </div>
+                            <div class="probability-item">
+                                <div class="prob-label">Rain</div>
+                                <div class="prob-value" id="rainProb">-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>Powered by Machine Learning | Random Forest Classifier</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

@@ -6,7 +6,9 @@ import os
 app = Flask(__name__)
 
 # === Absolute Paths (for Windows) ===
-BASE_DIR = r".\models"
+# BASE_DIR = r".\models"
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.join(SCRIPT_DIR, "models")
 
 MODEL_PATH = os.path.join(BASE_DIR, "rainfall_model.pkl")
 SCALER_PATH = os.path.join(BASE_DIR, "scaler.pkl")

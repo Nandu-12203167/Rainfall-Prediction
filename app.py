@@ -14,6 +14,15 @@ MODEL_PATH = os.path.join(BASE_DIR, "rainfall_model.pkl")
 SCALER_PATH = os.path.join(BASE_DIR, "scaler.pkl")
 METADATA_PATH = os.path.join(BASE_DIR, "metadata.pkl")
 
+LOG_DIR = os.path.join(SCRIPT_DIR, 'logs')
+os.makedirs(LOG_DIR, exist_ok=True)
+logging.basicConfig(
+    filename=os.path.join(LOG_DIR, 'app.log'), 
+    level=logging.INFO, 
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
 # === Initialize variables ===
 model, scaler, metadata = None, None, None
 
